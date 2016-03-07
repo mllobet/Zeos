@@ -93,8 +93,8 @@ void setIdt()
 void keyboard_routine()
 {
   unsigned char code = inb(0x60);
-  if (!(0x80 && code)) { //Make
-    char c = char_map[code && 0x7f];
+  if (!(0x80 & code)) { //Make
+    char c = char_map[code & 0x7f];
     if (c == '\0')
       printc_xy(0, 0, 'C');
     else
