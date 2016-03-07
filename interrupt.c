@@ -85,6 +85,9 @@ void setIdt()
   /* Set custom interrupt Handlers */
   setInterruptHandler(33, keyboard_handler, 0);
 
+  /* System call entry point */
+  setTrapHandler(0x80, system_call_handler, 3);
+
   /* ADD INITIALIZATION CODE FOR INTERRUPT VECTOR */
 
   set_idt_reg(&idtR);

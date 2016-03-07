@@ -43,3 +43,20 @@ int strlen(char *a)
   return i;
 }
 
+int write (int fd, char * buffer, int size)
+{
+  int ret;
+  __asm__ volatile( 
+        "int $0x80"
+        :"=a" (ret),            // resultat de %eax a ret
+        "+b" (fd), 
+        "+c" (buffer),
+        "+d" (size)
+        :"a"  (4)
+  );
+  if (ret < 0) {
+    errno = -ret;
+    ret = -1;
+  }
+  return ret;
+}
